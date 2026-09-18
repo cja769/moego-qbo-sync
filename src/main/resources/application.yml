@@ -5,5 +5,8 @@ spring:
     web-application-type: none
 sync:
   mock-enabled: ${SYNC_MOCK_ENABLED:true}
+  data-directory: ${SYNC_DATA_DIRECTORY:target/mock-data}
+  timezone: ${SYNC_TIMEZONE:America/Chicago}
+  cron: ${SYNC_CRON:0 0 3 * * *}
 # Production credentials will be supplied through environment variables or a secrets manager.
 # Never commit MOEGO_* or QBO_* secrets.
