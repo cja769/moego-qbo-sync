@@ -1,0 +1,14 @@
+name: CI
+on: [push, pull_request]
+permissions: {contents: read}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with: {repository: ${{ github.repository_owner }}/pos-qbo-journal-core, path: core}
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '17', cache: maven}
+      - run: mvn --batch-mode -f core/pom.xml install
+      - run: mvn --batch-mode verify
