@@ -1,0 +1,18 @@
+{
+  "businessId": "mock-grooming-business",
+  "serviceDate": "2026-09-18",
+  "totals": {
+    "servicesAndProducts": 500.00,
+    "discounts": 25.00,
+    "refunds": 20.00,
+    "taxes": 12.50,
+    "gratuity": 80.00,
+    "giftCardsIssued": 50.00,
+    "giftCardsUsed": 30.00,
+    "processingFees": 14.25
+  },
+  "payments": [
+    {"method": "worldpay", "amount": 547.50},
+    {"method": "cash", "amount": 20.00}
+  ]
+}
