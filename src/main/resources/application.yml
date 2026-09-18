@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: moego-qbo-sync
+  main:
+    web-application-type: none
+sync:
+  mock-enabled: ${SYNC_MOCK_ENABLED:true}
+# Production credentials will be supplied through environment variables or a secrets manager.
+# Never commit MOEGO_* or QBO_* secrets.
