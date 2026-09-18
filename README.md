@@ -11,3 +11,7 @@ docker compose up --build
 ```
 
 Production API clients, OAuth, scheduling, checkpoints, and deployment configuration will be added after sandbox credentials are available.
+
+## Persistent state
+
+The container stores atomic sync receipts under `SYNC_DATA_DIRECTORY` (`/data` in Compose). Keep the service single-instance and retain the named Docker volume. The shared reconciliation planner supports daily checks plus Sunday, monthly, quarterly, and annual verification windows. Default business time zone is `America/Chicago` and is configurable with `SYNC_TIMEZONE`.
