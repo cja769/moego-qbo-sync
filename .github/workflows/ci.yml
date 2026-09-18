@@ -7,7 +7,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
-        with: {repository: ${{ github.repository_owner }}/pos-qbo-journal-core, path: core}
+        with:
+          repository: ${{ github.repository_owner }}/pos-qbo-journal-core
+          path: core
       - uses: actions/setup-java@v4
         with: {distribution: temurin, java-version: '17', cache: maven}
       - run: mvn --batch-mode -f core/pom.xml install
