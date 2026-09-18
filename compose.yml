@@ -1,0 +1,9 @@
+services:
+  sync:
+    build:
+      context: .
+      additional_contexts:
+        qbo-core: ../pos-qbo-journal-core
+    environment:
+      SYNC_MOCK_ENABLED: "true"
+    restart: "no"
