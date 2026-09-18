@@ -6,4 +6,10 @@ services:
         qbo-core: ../pos-qbo-journal-core
     environment:
       SYNC_MOCK_ENABLED: "true"
+      SYNC_DATA_DIRECTORY: /data
+      SYNC_TIMEZONE: America/Chicago
+    volumes:
+      - sync-data:/data
     restart: "no"
+volumes:
+  sync-data:
