@@ -14,3 +14,18 @@ jobs:
         with: {distribution: temurin, java-version: '17', cache: maven}
       - run: mvn --batch-mode -f core/pom.xml install
       - run: mvn --batch-mode verify
+      - name: Verify the standalone worker image
+        run: |
+          set -eu
+          docker build -t qbo-sync-smoke .
+          container=$(docker run -d -e SYNC_RENDER_WORKER=true -v /data qbo-sync-smoke)
+          trap 'docker logs "$container"; docker rm -fv "$container" >/dev/null' EXIT
+          for attempt in $(seq 1 30); do
+            if docker logs "$container" 2>&1 | grep -q 'Fixture run complete'; then
+              docker logs "$container" 2>&1 | grep -q 'CREATED journal entry'
+              test "$(docker inspect --format '{{.State.Running}}' "$container")" = true
+              exit 0
+            fi
+            sleep 1
+          done
+          exit 1
