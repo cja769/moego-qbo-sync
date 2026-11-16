@@ -4,12 +4,15 @@ services:
       context: .
       additional_contexts:
         qbo-core: ../pos-qbo-journal-core
+    env_file:
+      - path: .env
+        required: false
     environment:
-      SYNC_MOCK_ENABLED: "true"
+      SYNC_MOCK_ENABLED: "${SYNC_MOCK_ENABLED:-true}"
       SYNC_DATA_DIRECTORY: /data
-      SYNC_TIMEZONE: America/Chicago
+      SYNC_TIMEZONE: "${SYNC_TIMEZONE:-America/Chicago}"
     volumes:
       - sync-data:/data
-    restart: "no"
+    restart: "${SYNC_RESTART_POLICY:-no}"
 volumes:
   sync-data:
