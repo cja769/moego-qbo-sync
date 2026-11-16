@@ -70,3 +70,19 @@ for in sales totals, exclude that duplicate tender label from the payment report
 Choose compatible sale and payment date bases and verify their totals before
 posting. Worldpay deposits belong in payment clearing. The report API provides
 sales and payment activity. It does not retrieve Worldpay bank settlement detail.
+
+
+## Render worker
+
+The container build also works without the sibling checkout. It fetches the
+shared core at the commit pinned in the Dockerfile. The Render Blueprint in
+`lightspeed-qbo-sync` defines both workers with separate persistent disks.
+
+The first deploy runs the fixture test and waits for configuration. To switch to
+a live dry run, set the source and QuickBooks environment variables above, keep
+`SYNC_WRITE_MODE=dry-run`, set `SYNC_CRON` to a six-field expression, and upload
+the initial Intuit refresh token as the Render secret file `qbo-refresh-token`.
+The startup script seeds the token on an empty disk and preserves the rotated
+token on later deploys. Store the JSON mappings as Render secret files and set
+the applicable mapping-path variables to their paths under `/etc/secrets`.
+Set `SYNC_MOCK_ENABLED=false` when the required values are ready.
