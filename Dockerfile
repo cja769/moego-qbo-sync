@@ -13,7 +13,7 @@ COPY src src
 RUN mvn --batch-mode package
 
 FROM eclipse-temurin:17-jre
-RUN useradd --system --uid 10001 app
+RUN useradd --system --uid 10001 app && install -d -o app -g app /data
 USER app
 COPY --from=build /app/target/moego-qbo-sync-*.jar /app/app.jar
 ENTRYPOINT ["java","-jar","/app/app.jar"]
